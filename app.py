@@ -7,7 +7,7 @@ app.secret_key = "shhhhthisisasecret"
 @app.route("/")
 def index():
     if session.get("username"):
-        return "User %s is logged in!" % session['username']
+        return render_template("wall.html")
     else:
         return render_template("index.html")
 
@@ -32,7 +32,16 @@ def register():
 @app.route("/logout")
 def logout():
     session.clear()
-    return "User %s has logged out!" % session['username']
+    flash('Logged out!')
+    return redirect(url_for("index"))
+
+@app.route("/user/<username>")
+def view_user(username):
+    model.connect_to_db()
+    user_id = model.get_user_by_name(username)[0]
+    wall_posts = model.get_wallposts_by_user(user_id)
+    return render_template("wall.html", posts = wall_posts,
+                                        username = session.get(username, None))
 
 if __name__ == "__main__":
     app.run(debug = True)

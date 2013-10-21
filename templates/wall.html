@@ -1,0 +1,19 @@
+{% extends 'master.html' %}
+
+{% block body %}
+
+{% for post in posts %}
+    <div>
+        <p>{{post[2]}}</p>
+        <p>{{post[4]}}</p>
+        <p>{{post[3]}}</p>
+    </div>
+{% endfor %}
+
+{% if session.get(username) %}
+    <form action="/" action = "??" method="POST">
+        <input type = "text" 
+
+
+
+{% endblock %}
