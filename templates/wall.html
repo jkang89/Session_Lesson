@@ -10,10 +10,10 @@
     </div>
 {% endfor %}
 
-{% if session.get(username) %}
-    <form action="/" action = "??" method="POST">
-        <input type = "text" 
-
+<form action="/user/{{username}}" method="POST">
+    <input type = "text" placeholder = "Post Text" name = "wall_post_text">
+    <input type="submit" value="Submit">
+</form>
 
 
 {% endblock %}
